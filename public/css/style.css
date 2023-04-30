@@ -1,0 +1,132 @@
+
+:root {
+    --primary-blue-color: #0078D4;
+    --primary-gray-color: #F6F8FA;
+    --primary-pink-color: #F7A1C4;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100svh;
+    justify-content: space-between;
+    margin: 0;
+    width: 100%;
+}
+
+header {
+    align-items: center;
+    background-color: var(--primary-pink-color);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+    min-height: 10svh;
+    padding: 0 5%;
+    width: 90%;
+}
+
+#logo {
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+header>nav {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+header>nav>div {
+    cursor: pointer;
+    font-size: large;
+    font-weight: bold;
+}
+
+#about-us, #contact-us {
+    white-space: nowrap;
+}
+
+#auth-div {
+    align-items: center;
+    /* justify-self: flex-end; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+#sign-up, #sign-in, #get-started {
+    text-align: center;
+    text-decoration: none;
+}
+
+#sign-up, #get-started {
+    background-color: var(--primary-blue-color);
+    color: white;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    width: 10rem;
+}
+
+#sign-up:hover, #get-started:hover {
+    background-color: #00bcd4;
+}
+
+#sign-in {
+    background: none;
+    font-weight: bold;
+}
+
+header>nav>div:hover, #sign-in:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--primary-blue-color);
+    text-decoration-thickness: 0.3rem;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    width: 100%;
+}
+
+main>div:first-child {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5%;
+    min-width: 290px;
+
+}
+
+main>div:first-child>p{
+    font-size: x-large;
+}
+
+
+#main-image {
+    background: url(../images/people-analyzing-growth-charts_23-2148866843.png);
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 900px;
+}
+
+footer {
+    align-items: center;
+    background-color: var(--primary-gray-color);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2svh;
+    min-height: 3rem;
+}
