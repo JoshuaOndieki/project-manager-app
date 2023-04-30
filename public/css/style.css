@@ -46,12 +46,6 @@ header>nav>div {
     font-weight: bold;
 }
 
-header>nav>div:hover, #sign-in:hover {
-    text-decoration: underline;
-    text-decoration-color: var(--primary-blue-color);
-    text-decoration-thickness: 0.3rem;
-}
-
 #about-us, #contact-us {
     white-space: nowrap;
 }
@@ -89,6 +83,12 @@ button {
 #sign-in {
     background: none;
     font-weight: bold;
+}
+
+header>nav>div:hover, #sign-in:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--primary-blue-color);
+    text-decoration-thickness: 0.3rem;
 }
 
 main {
