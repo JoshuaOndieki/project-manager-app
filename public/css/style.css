@@ -127,5 +127,6 @@ footer {
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
+    margin-top: 2svh;
     min-height: 3rem;
 }
