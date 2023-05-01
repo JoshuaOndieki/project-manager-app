@@ -26,7 +26,7 @@ jobs:
       - codecov/upload:
           name: Upload coverage reports to Codecov
           file: ./coverage.json
-          token: $CODECOV_TOKEN
+          token: ${CODECOV_TOKEN}
 
 # Orchestrate our job run sequence
 workflows:
