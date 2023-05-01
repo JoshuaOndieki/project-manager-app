@@ -21,8 +21,8 @@ jobs:
         pkg-manager: npm
       - run: npm test
       - store_artifacts:
-        path: coverage/coverage-final.json
-        destination: coverage.json
+          path: coverage/coverage-final.json
+          destination: coverage.json
       - codecov/upload:
           name: Upload coverage reports to Codecov
           file: ./coverage.json
