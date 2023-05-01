@@ -1,0 +1,30 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.7
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: cimg/node:18.16
+    steps:
+      - checkout
+      - node/install-packages:
+        pkg-manager: npm
+      - run: npm run build
+  test:
+    docker:
+      - image: cimg/node:18.16
+    steps:
+      - checkout
+      - node/install-packages:
+        pkg-manager: npm
+      - run: npm test
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
