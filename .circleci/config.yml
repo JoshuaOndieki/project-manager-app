@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@4.7
+  codecov: codecov/codecov@1.0.1
 # Define the jobs we want to run for this project
 jobs:
   build:
@@ -19,6 +20,13 @@ jobs:
       - node/install-packages:
         pkg-manager: npm
       - run: npm test
+      - store_artifacts:
+        path: coverage/coverage-final.json
+        destination: coverage.json
+      - codecov/upload:
+          name: Upload coverage reports to Codecov
+          file: ./coverage.json
+          token: $CODECOV_TOKEN
 
 # Orchestrate our job run sequence
 workflows:
