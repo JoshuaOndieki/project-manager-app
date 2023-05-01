@@ -4,7 +4,8 @@
   "description": "Project management app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "bash tests/test.sh"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +13,8 @@
   "dependencies": {
     "json-server": "^0.17.3",
     "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "vitest": "^0.30.1"
   }
 }
