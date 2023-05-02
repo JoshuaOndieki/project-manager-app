@@ -30,7 +30,7 @@ jobs:
           path: coverage/coverage-final.json
           destination: ./coverage.json
       - codecov/upload:
-          file: ./coverage.json
+          file: ./coverage/coverage-final.json
           token: CODECOV_TOKEN
 
 # Orchestrate our job run sequence
