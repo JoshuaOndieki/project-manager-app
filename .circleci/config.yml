@@ -12,6 +12,10 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - run: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
   test:
     docker:
       - image: cimg/node:18.16
@@ -22,9 +26,9 @@ jobs:
       - run: npm test
       - store_artifacts:
           path: coverage/coverage-final.json
-          destination: coverage.json
+          destination: ./coverage.json
       - codecov/upload:
-          file: coverage.json
+          file: ./coverage.json
           token: CODECOV_TOKEN
 
 # Orchestrate our job run sequence
