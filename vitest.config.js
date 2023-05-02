@@ -11,6 +11,7 @@ export default defineConfig({
       '*'
     ],
     coverage: {
+      reporter: ['lcov', 'json', 'text', 'html', 'clover'],
       all: true,
       exclude: [
         '**/*.ts',

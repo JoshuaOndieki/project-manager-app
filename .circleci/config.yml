@@ -27,10 +27,10 @@ jobs:
           pkg-manager: npm
       - run: npm test
       - store_artifacts:
-          path: coverage/coverage-final.json
-          destination: ./coverage.json
+          path: coverage/clover.xml
+          destination: ./clover.xml
       - codecov/upload:
-          file: ./coverage/coverage-final.json
+          file: ./coverage/clover.xml
           token: CODECOV_TOKEN
 
 # Orchestrate our job run sequence
