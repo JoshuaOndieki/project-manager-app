@@ -21,6 +21,8 @@ jobs:
       - image: cimg/node:18.16
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - node/install-packages:
           pkg-manager: npm
       - run: npm test
