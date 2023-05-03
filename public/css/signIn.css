@@ -1,0 +1,31 @@
+.form {
+    background-color: #E6E9F8;
+    gap:20px;
+    width:25%;
+    height:60%;
+    padding:20px;
+    margin-top: 8rem;
+    display:flex; 
+    /* flex-wrap:wrap; */
+    justify-content: center; 
+    align-items: center;
+    
+    
+}
+.form input{
+padding:0.8rem;
+border:none;
+width:80%;
+
+}
+#submit{
+width:40%;
+display: flex;
+justify-content: center;
+background-color: #0078D4;
+color:white;
+font-size: 16px;
+padding:2%;
+
+
+}
