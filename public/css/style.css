@@ -13,6 +13,7 @@ body {
     justify-content: space-between;
     margin: 0;
     width: 100%;
+    gap:1rem
 }
 
 header {
