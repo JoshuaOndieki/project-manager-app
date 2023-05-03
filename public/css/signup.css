@@ -8,8 +8,8 @@
 
 
 form{
-    background-color:#E6E9F8 ;
-    width: 60%;
+    background-color:var(--primary-gray-color) ;
+    width: 90%;
     /* border: 1px solid red; */
     gap: 2rem;
     padding: 1rem;
@@ -36,6 +36,6 @@ input{
 .FM{
    
     border: none;
-    width: 18rem;
+    width: 90%;
     /* padding: 1rem; */
 }
