@@ -1,6 +1,7 @@
 
 :root {
     --primary-blue-color: #0078D4;
+    --primary-blue-hover-color: #00bcd4;
     --primary-gray-color: #F6F8FA;
     --primary-pink-color: #F7A1C4;
 }
@@ -78,7 +79,7 @@ button {
 }
 
 #sign-up:hover, #get-started:hover {
-    background-color: #00bcd4;
+    background-color: var(--primary-blue-hover-color);
 }
 
 #sign-in {
