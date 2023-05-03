@@ -1,15 +1,13 @@
-.form {
+
+form {
     background-color: #E6E9F8;
-    gap:20px;
-    width:25%;
-    height:60%;
-    padding:20px;
+    gap:10px;
+    height:50svh;
     margin-top: 8rem;
     display:flex; 
-    /* flex-wrap:wrap; */
     justify-content: center; 
     align-items: center;
-    
+    flex-direction: column;
     
 }
 .form input{
