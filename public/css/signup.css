@@ -1,0 +1,41 @@
+.signup{
+    display: flex;
+    /* padding-left: 4rem; */
+   
+    align-content: center;
+}
+
+
+
+form{
+    background-color:#E6E9F8 ;
+    width: 60%;
+    /* border: 1px solid red; */
+    gap: 2rem;
+    padding: 1rem;
+    padding-top: 4rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+input{
+   height: 2rem;
+   padding-left: 1rem;
+   padding: 0.5rem;
+
+}
+#btn{
+    
+    color: blanchedalmond;
+    padding: 0.5rem;
+    width: 60%;
+
+}
+.FM{
+   
+    border: none;
+    width: 18rem;
+    /* padding: 1rem; */
+}
