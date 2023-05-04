@@ -1,4 +1,3 @@
-#!/bin/bash
 json-server --watch tests/testdb.json --port 3000 &
 server_pid=$!
 
