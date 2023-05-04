@@ -1,7 +1,7 @@
-name: Workflow for Codecov example-javascript
+name: Workflow for Codecov project-manager-app
 on: [push, pull_request]
 jobs:
-  run:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
