@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "bash test.sh"
+    "test": "test.sh"
   },
   "keywords": [],
   "author": "",
