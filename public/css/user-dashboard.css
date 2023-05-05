@@ -1,0 +1,98 @@
+body {
+    overflow-x: hidden;
+    width:100%;
+}
+
+main>div:first-child {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+main>div:first-child>p{
+    font-size: medium;
+}
+main{
+   background-color: #fff;
+    margin:0;
+    padding:0;
+    gap: 1rem;
+    display: flex;
+}
+
+.userpanel{
+background-color: #E6E9F8;
+    /* height: 60svh; */
+    display:flex;
+    flex:1;
+    padding-left: 1rem;    
+}
+
+.assignedbtn{
+    display: flex;
+    background-color: #fff;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+#assigned,#completedbtn{
+    width:100%;
+    padding:3%;
+    color: white;
+}
+
+#assigned{
+    background-color: #325AC0;
+}
+
+#completedbtn{
+    background-color: #6F89CB;
+}
+
+.assigned,.completed{
+    width:50%;
+}
+
+.projectscompleted,.projectsassigned{
+    width:70%;
+    background-color: #fff;
+    
+}
+.projectscompleted{
+    display:none
+}
+.projectscontainer{
+    display:flex;
+    flex-wrap: wrap;
+    gap:1rem;
+}
+.card{
+    background-color: #E6E9F8;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.buttons{
+   display:flex; 
+   gap:4%;
+}
+
+#inprogress{
+    background-color: #C0327F;
+    color:white;
+    display:flex;  
+}
+
+#completed{
+    background-color: #55BB72;
+    color:white;
+}
+
+.footer{
+    margin-top:0;
+}
