@@ -57,5 +57,4 @@ class User{
     }
 }
 
-User.userSignup({name:'Belinda5',email:'belinda1@jitu',password:'belind7aaa'})
 
