@@ -22,12 +22,24 @@ interface IUser
 
 
  class User{
+    
+
     static userEndPoint = 'http://localhost:3000/users'
     loggedUser: number
     constructor(loggedUser:number){
        this.loggedUser = loggedUser;
+       
     }
+    init(){
+        let assignedSectionBtn = document.getElementById('assigned-section-btn') as HTMLButtonElement
+        let completedSectionBtn = document.getElementById('completed-section-btn') as HTMLButtonElement
+        assignedSectionBtn.addEventListener('click',()=>{this.renderAssignedProject()})
+        completedSectionBtn.addEventListener('click',()=>{this.renderCompletedProjects()})
+        this.renderAssignedProject()
+        this.renderUserData()
 
+  
+    }
      static async userSignup(user:IUser){
         const user1 = await User.getUserByEmail(user.email)
         if (user1.length){return false}
@@ -63,26 +75,35 @@ interface IUser
         const response = await fetch(User.userEndPoint+"/"+this.loggedUser)
         const loggedUser = await response.json()
         delete loggedUser.password
-        // console.log(loggedUser)
+        return loggedUser
+    }
+    async renderUserData(){
+        let userData:Partial<IUser>= await this.getLoggedUser()
+        document.getElementById('user-name')!.innerHTML= 'Name: '+ userData.name
+        document.getElementById('user-id')!.innerHTML= 'ID: '+ userData.id
+        document.getElementById('user-email')!.innerHTML= 'Email: '+ userData.email
+
     }
     async userProjects(statuses:string[]){
         let projects = await Project.getUserProjects(this.loggedUser)
         return projects.filter((project:IProject)=>{return statuses.includes(project.status)})
 
     }
-    statusButtons(status:TStatus){
-        let notStartedButton = `<button class="not-started-btn">Not Started</button>`
-        let inProgressButton = `<button class="in-progress-btn">In Progress</button>`
-        let completeButton = `<button class="complete-btn">Completed</button>`
+    statusButtons(cProject:Required<IProject>){
+        let notStartedButton = `<button class="not-started-btn" onClick="${Project.updateProject(cProject.id,{status:'Not Started'})}">Not Started</button>`
+        let inProgressButton = `<button class="in-progress-btn" onClick="${Project.updateProject(cProject.id,{status:'In Progress'})}">In Progress</button>`
+        let completeButton = `<button class="complete-btn" onClick="${Project.updateProject(cProject.id,{status:'Completed'})}">Complete</button>`
 
-        return status== 'Not Started'?inProgressButton+completeButton:notStartedButton+completeButton
-    }
+        return cProject.status== 'Not Started'?inProgressButton+completeButton:notStartedButton+completeButton
+        }
 
     async renderAssignedProject(){
-        let assignedProject:IProject = (await this.userProjects(['Not Started','In Progress']))[0]
+        let assignedProject:Required<IProject>
+        assignedProject = (await this.userProjects(['Not Started','In Progress']))[0]
         let projectsContainer = document.getElementById("projects-container") ! as HTMLDivElement
         
-        if (assignedProject.title && projectsContainer) {
+        if (assignedProject && projectsContainer) {
+          
 
            let projectHTML = 
            ` <div class="card">
@@ -90,39 +111,44 @@ interface IUser
             <p>Due Date: ${assignedProject.dueDate}</p>
             <p>Status: ${assignedProject.status}</p>
             <div class="buttons">
-                
-                ${this.statusButtons(assignedProject.status)}
+            
+                 
+            <button class="in-progress-btn">In Progress</button>
+            <button class="complete-btn">Complete</button>
+            
             </div>
             
         </div>`
             projectsContainer.innerHTML= projectHTML          
         } 
+        else{
+            projectsContainer.innerHTML= "You have not been assigned any project"
+        }
         
     }
-    async renderCompletedProjects(){
+    async renderCompletedProjects(){        
         let completedProjects = await this.userProjects(['Completed'])
         let projectsContainer = document.getElementById("projects-container") ! as HTMLDivElement
-        if (completedProjects .title && projectsContainer) {    
-           let projectHTML = 
-           ` <div class="card">
-            <h3> Title: ${completedProjects.title}</h3>
-            <p>Due Date: ${completedProjects.dueDate}</p>
-            <p>Status: ${completedProjects.status}</p>
-            <div class="buttons">
-                
-                <button id="completed">Completed</button>
-            </div>
-            
-        </div>`
-            projectsContainer.innerHTML= projectHTML          
-        } 
+        projectsContainer.innerHTML=""
+       if (completedProjects.length) {
+            completedProjects.map((cProject:Required<IProject>)=>{
+                    let projectHTML = 
+                    ` <div class="card">
+                     <h3> Title: ${cProject.title}</h3>
+                     <p>Due Date: ${cProject.dueDate}</p>
+                     
+                 </div>`
+                     projectsContainer.innerHTML+= projectHTML          
+                 } 
+            )
+        
+       } else {
+        projectsContainer.innerHTML+='You have not completed any project'
+       }
         
     }
 }
- let userInstance = new User(2)
+//  let userInstance = new User(2)
+// userInstance.init()
+// userInstance.getLoggedUser()
 
- userInstance.getLoggedUser()
-userInstance.renderCompletedProjects()
-
-
-userInstance.renderAssignedProject()

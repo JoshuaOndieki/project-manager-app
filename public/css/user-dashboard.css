@@ -43,15 +43,15 @@ background-color: #E6E9F8;
     color: white;
 }
 
-#assigned{
+#assigned-section-btn{
     background-color: #325AC0;
 }
 
-#completedbtn{
+#completed-section-btn{
     background-color: #6F89CB;
 }
 
-.assigned,.completed{
+#assigned,#completed{
     width:50%;
 }
 
