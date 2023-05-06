@@ -2,3 +2,5 @@ node_modules/
 dist/
 .vscode
 coverage/
+testdb.json
+.cache/

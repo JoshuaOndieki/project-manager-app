@@ -55,14 +55,11 @@ header>nav {
     gap: 0.5rem;
 }
 
-header>nav>div {
+#about-us, #contact-us {
+    white-space: nowrap;
     cursor: pointer;
     font-size: large;
     font-weight: bold;
-}
-
-#about-us, #contact-us {
-    white-space: nowrap;
 }
 
 #auth-div {
@@ -100,7 +97,7 @@ button {
     font-weight: bold;
 }
 
-header>nav>div:hover, #sign-in:hover {
+.header-nav-link:hover, #sign-in:hover {
     text-decoration: underline;
     text-decoration-color: var(--primary-blue-color);
     text-decoration-thickness: 0.3rem;
