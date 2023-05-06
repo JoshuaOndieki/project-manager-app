@@ -55,21 +55,25 @@ background-color: #E6E9F8;
     width:50%;
 }
 
-.projectscompleted,.projectsassigned{
+.projects-and-nav{
     width:70%;
     background-color: #fff;
+    display: flex;
+    flex-direction: column;
+
     
 }
-.projectscompleted{
-    display:none
-}
-.projectscontainer{
+
+#projects-container{
     display:flex;
     flex-wrap: wrap;
     gap:1rem;
+    background-color: var(--primary-gray-color);
+    /* flex:1; */
 }
 .card{
     background-color: #E6E9F8;
+    border:  1px solid pink;
     display: flex;
     flex-direction: column;
     border-radius: 5%;
@@ -82,13 +86,18 @@ background-color: #E6E9F8;
    gap:4%;
 }
 
-#inprogress{
+.in-progress-btn{
+    background-color: #C0327F;
+    color:white;
+    display:flex;  
+}
+.not-started-btn{
     background-color: #C0327F;
     color:white;
     display:flex;  
 }
 
-#completed{
+.complete-btn{
     background-color: #55BB72;
     color:white;
 }
