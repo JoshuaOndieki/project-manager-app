@@ -6,7 +6,7 @@ interface IProject {
     dueDate: string
 }
 
-
+// export default IProject
 
 
 export class Project {
