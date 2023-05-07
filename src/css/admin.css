@@ -25,6 +25,7 @@ main {
 }
 
 #details-nav-container>* {
+    /* max-height: 60svh; */
     width: 100%;
 }
 
@@ -40,6 +41,7 @@ main {
     display: flex;
     flex: 1;
     flex-direction: column;
+    gap: 2rem;
     min-height: 60svh;
     min-width: min(90svw, 70%);
     padding: 2% 0;
@@ -121,4 +123,96 @@ main {
 #add-project label {
     height: 2rem;
     line-height: 2rem;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    max-height: 55svh;
+    overflow-y: auto;
+}
+
+.project-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: min(420px, 70svw);
+}
+
+.project-title {
+    font-family: RobotoBold;
+    font-size: large;
+    margin: 0.5rem 0;
+}
+
+hr {
+    border-color: var(--primary-gray-color);
+    margin: 0;
+}
+
+.project-main-details {
+    background-color: var(--theme-red-color);
+    border-radius: 0.5rem;
+    color: white;
+    display: flex;
+    /* width: min(360px, 90%); */
+    flex: 1;
+    flex-direction: column;
+    font-weight: bold;
+    justify-content: space-around;
+    min-width: 150px;
+    padding: 0.5rem;
+}
+
+.project-extra-details {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    font-family: RobotoMono;
+    gap: 0.5rem;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+
+
+.project-actions {
+    align-self: flex-end;
+    display: flex;
+}
+
+.project-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-action {
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 2rem;
+}
+
+.project-update-btn {
+    background-color: var(--primary-blue-color);
+}
+.project-update-btn:hover {
+    background-color: var(--primary-blue-hover-color);
+}
+
+.project-delete-btn {
+    background-color: var(--theme-red-color);
+}
+.project-delete-btn:hover {
+    background-color: var(--primary-pink-color);
+}
+
+
+@media (max-width: 520px) {
+    .project-main-details {
+        width: 100%;
+    }
 }
