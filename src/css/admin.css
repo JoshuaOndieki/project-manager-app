@@ -132,11 +132,13 @@ main {
     justify-content: center;
     max-height: 55svh;
     overflow-y: auto;
+    padding: 1rem;
 }
 
 .project-card {
     background-color: white;
     border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgb(158, 159, 162);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -144,8 +146,9 @@ main {
 }
 
 .project-title {
+    /* color: black; */
     font-family: RobotoBold;
-    font-size: large;
+    font-size: larger;
     margin: 0.5rem 0;
 }
 
@@ -155,7 +158,8 @@ hr {
 }
 
 .project-main-details {
-    background-color: var(--theme-red-color);
+    /* background-color: #607d8b; */
+    background-color: var(--primary-pink-color);
     border-radius: 0.5rem;
     color: white;
     display: flex;
