@@ -7,6 +7,7 @@
     <title>Project Manager App</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/signIn.css">
+    <script defer type="module" src="../js/app.ts"></script>
 </head>
 <body>
     <header>
@@ -16,17 +17,17 @@
             <div id="contact-us">Contact Us</div>
         </nav>
         <div id="auth-div">
-            <a href="/signin.html" id="sign-in">Sign in</a>
-            <a href="/signup.html" id="sign-up">Sign up</a>
+            <a href="./signin.html" id="sign-in">Sign in</a>
+            <a href="./signup.html" id="sign-up">Sign up</a>
         </div>
     </header>
     <main>
         <div class="form">
-            <form action="">
+            <form action="" id="signin-form">
                 <h3> Sign in </h3>
                 <input type="email" id="email" placeholder="Enter Your Email" name="email" required>
                 <input type="password" id="password"  placeholder="Enter Your Password" name="password" required>
-                <p style="font-size: 14px; color:rgb(41, 189, 41)">Forgot Password</p>
+                <a href="./forgot-password.html" style="font-size: 14px; color:rgb(41, 189, 41)">Forgot Password</a>
                 <button type="submit" id="submit"> Sign in </button>
             </form>
             
@@ -39,5 +40,9 @@
     <footer>
         <span>Made by</span> <a href="https://github.com/JoshuaOndieki">Joshua Ondieki</a> | <a href="https://github.com/Gamalie/">Belinda Florence</a> | <a href="https://github.com/FLAMES39">Christian Adamola</a>
     </footer>
+
+    <!-- TO-DO: Figure out how to have these files bundled by Parcel even when there are not explicilty referenced -->
+    <a hidden href="./admin.html"></a>
+    <a hidden href="./user.html"></a>
 </body>
 </html>

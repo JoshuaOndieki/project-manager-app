@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Manager App - ADMIN</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <script defer type="module" src="../js/app.ts"></script>
+</head>
+<body>
+    <header>
+        <div id="logo">ProjectManager</div>
+        <nav>
+            <div id="dashboard-type">Admin Dashboard</div> |
+            <div id="current-section">Unassigned Projects</div>
+        </nav>
+        <div id="auth-div">
+            <button id="sign-out">Sign out</button>
+        </div>
+    </header>
+    <main>
+        <section id="details-nav-container">
+            <div id="details">
+                <p><span>Name: </span>John Doe</p>
+                <p><span>ID: </span>123458</p>
+                <p><span>Email: </span>email@example.com</p>
+            </div>
+            <nav>
+                <div id="viewusers-section-btn">View Users</div>
+                <ul id="admin-sections-btns">
+                    <li id="unassigned-section-btn" class="admin-sections-btn selected-section">Unassigned (<span>3</span>)</li>
+                    <li id="assigned-section-btn" class="admin-sections-btn">Assigned (<span>7</span>)</li>
+                    <li id="completed-section-btn" class="admin-sections-btn">Completed (<span>14</span>)</li>
+                </ul>
+            </nav>
+        </section>
+        <section id="main-section">
+            <form id="add-project" action="">
+                <input type="text" name="new-project-name" id="new-project-name" placeholder="New Project Description">
+                <div>
+                    <label for="new-project-duedate">Due Date:</label>
+                    <input type="date" name="new-project-duedate" id="new-project-duedate">
+                </div>
+                <input type="submit" value="ADD PROJECT">
+            </form>
+        </section>
+    </main>
+    <footer>
+        <span>Made by</span> <a href="https://github.com/JoshuaOndieki">Joshua Ondieki</a> | <a href="https://github.com/Gamalie/">Belinda Florence</a> | <a href="https://github.com/FLAMES39">Christian Adamola</a>
+    </footer>
+</body>
+</html>
