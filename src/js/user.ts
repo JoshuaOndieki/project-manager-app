@@ -94,10 +94,9 @@ export interface IUser
 
     }
     statusButtons(cProject:Required<IProject>){
-        let notStartedButton = `<button class="not-started-btn" onClick="${Project.updateProject(cProject.id,{status:'Not Started'})}">Not Started</button>`
-        let inProgressButton = `<button class="in-progress-btn" onClick="${Project.updateProject(cProject.id,{status:'In Progress'})}">In Progress</button>`
-        let completeButton = `<button class="complete-btn" onClick="${Project.updateProject(cProject.id,{status:'Completed'})}">Complete</button>`
-
+        let notStartedButton = `<button class="not-started-btn">Not Started</button>`
+        let inProgressButton = `<button class="in-progress-btn">In Progress</button>`
+        let completeButton = `<button class="complete-btn">Complete</button>`
         return cProject.status== 'Not Started'?inProgressButton+completeButton:notStartedButton+completeButton
         }
 
@@ -116,14 +115,30 @@ export interface IUser
             <p>Status: ${assignedProject.status}</p>
             <div class="buttons">
             
-                 
-            <button class="in-progress-btn">In Progress</button>
-            <button class="complete-btn">Complete</button>
-            
+            ${this.statusButtons(assignedProject)}
             </div>
             
         </div>`
-            projectsContainer.innerHTML= projectHTML          
+            projectsContainer.innerHTML= projectHTML 
+            let notStartedButton = document.querySelector('.not-started-btn') 
+            let inProgressButton= document.querySelector('.in-progress-btn') 
+            let completeButton = document.querySelector('.complete-btn') 
+            notStartedButton?.addEventListener('click',async()=>{
+                await Project.updateProject(assignedProject.id,{status:'Not Started'})
+                location.reload()
+
+        })
+            inProgressButton?.addEventListener('click',async()=>{
+                await Project.updateProject(assignedProject.id,{status:'In Progress'})
+                location.reload()
+
+            })
+            completeButton?.addEventListener('click',async()=>{
+                await Project.updateProject(assignedProject.id,{status:'Completed'})
+                location.reload()
+            })
+            
+
         } 
         else{
             projectsContainer.innerHTML= "You have not been assigned any project"
