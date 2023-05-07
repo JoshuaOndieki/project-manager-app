@@ -127,7 +127,7 @@ main>div:first-child>p{
 #main-image {
     background: url(../assets/images/people-analyzing-growth-charts_23-2148866843.png);
     background-repeat: no-repeat;
-    height: 100%;
+    /* height: 100%; */
     width: 900px;
 }
 

@@ -3,7 +3,7 @@
         {
             "id":1,
             "name": "John Doe",
-            "role": "admin",
+            "role": "Admin",
             "email": "admin@projectmanagerapp.com",
             "password": "pass" 
         }
