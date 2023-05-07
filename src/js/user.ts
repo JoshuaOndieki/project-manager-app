@@ -123,9 +123,20 @@ export interface IUser
             let notStartedButton = document.querySelector('.not-started-btn') 
             let inProgressButton= document.querySelector('.in-progress-btn') 
             let completeButton = document.querySelector('.complete-btn') 
-            notStartedButton?.addEventListener('click',()=>{Project.updateProject(assignedProject.id,{status:'Not Started'})})
-            inProgressButton?.addEventListener('click',()=>{Project.updateProject(assignedProject.id,{status:'In Progress'})})
-            completeButton?.addEventListener('click',()=>{Project.updateProject(assignedProject.id,{status:'Completed'})})
+            notStartedButton?.addEventListener('click',async()=>{
+                await Project.updateProject(assignedProject.id,{status:'Not Started'})
+                location.reload()
+
+        })
+            inProgressButton?.addEventListener('click',async()=>{
+                await Project.updateProject(assignedProject.id,{status:'In Progress'})
+                location.reload()
+
+            })
+            completeButton?.addEventListener('click',async()=>{
+                await Project.updateProject(assignedProject.id,{status:'Completed'})
+                location.reload()
+            })
             
 
         } 
