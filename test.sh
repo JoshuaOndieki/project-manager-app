@@ -1,9 +1,11 @@
 #!/bin/bash
-json-server --watch tests/testdb.json --port 3000 &
+
+cp db.json testdb.json
+
+json-server --watch testdb.json --port 3000 &
 server_pid=$!
 
-# vitest --reporter verbose --coverage ./coverage/coverage.json --coverage-provider istanbul
-vitest run --coverage **/*.js --config ./src/vitest.config.ts
+jest --coverage
 
 kill $server_pid
 

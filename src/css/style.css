@@ -1,20 +1,33 @@
+@font-face {
+    font-family: RobotoBold;
+    src: url(../assets/fonts/Roboto/Roboto-Bold.ttf);
+}
+
+@font-face {
+    font-family: RobotoMono;
+    src: url(../assets/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf);
+}
+
 
 :root {
     --primary-blue-color: #0078D4;
     --primary-blue-hover-color: #00bcd4;
     --primary-gray-color: #F6F8FA;
     --primary-pink-color: #F7A1C4;
+    --primary-light-pink-color: #f7a1c42b;
+    --primary-blue-hover-color: #00bcd4;
+    --gray-border-color: #cfd9de;
 }
 
 
 body {
     display: flex;
     flex-direction: column;
-    height: 100svh;
+    gap:1rem;
     justify-content: space-between;
     margin: 0;
-    width: 100%;
-    gap:1rem
+    min-height: 100svh;
+    width: 100%
 }
 
 header {
@@ -25,7 +38,7 @@ header {
     gap: 1rem;
     justify-content: space-around;
     min-height: 10svh;
-    padding: 0 5%;
+    padding: 1% 5%;
     width: 90%;
 }
 
@@ -42,13 +55,10 @@ header>nav {
     gap: 0.5rem;
 }
 
-header>nav>div {
+#about-us, #contact-us {
     cursor: pointer;
     font-size: large;
     font-weight: bold;
-}
-
-#about-us, #contact-us {
     white-space: nowrap;
 }
 
@@ -87,7 +97,7 @@ button {
     font-weight: bold;
 }
 
-header>nav>div:hover, #sign-in:hover {
+.header-nav-link:hover, #sign-in:hover {
     text-decoration: underline;
     text-decoration-color: var(--primary-blue-color);
     text-decoration-thickness: 0.3rem;
@@ -107,7 +117,6 @@ main>div:first-child {
     justify-content: center;
     margin-left: 5%;
     min-width: 290px;
-
 }
 
 main>div:first-child>p{
@@ -116,7 +125,7 @@ main>div:first-child>p{
 
 
 #main-image {
-    background: url(../images/people-analyzing-growth-charts_23-2148866843.png);
+    background: url(../assets/images/people-analyzing-growth-charts_23-2148866843.png);
     background-repeat: no-repeat;
     height: 100%;
     width: 900px;

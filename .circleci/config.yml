@@ -31,7 +31,6 @@ jobs:
           destination: ./clover.xml
       - codecov/upload:
           file: ./coverage/clover.xml
-          token: CODECOV_TOKEN
 
 # Orchestrate our job run sequence
 workflows:
