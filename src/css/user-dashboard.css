@@ -37,7 +37,7 @@ background-color: #E6E9F8;
     margin-bottom: 1rem;
 }
 
-#assigned,#completedbtn{
+#assigned-section-btn,#completed-section-btn{
     width:100%;
     padding:3%;
     color: white;
@@ -51,7 +51,7 @@ background-color: #E6E9F8;
     background-color: #6F89CB;
 }
 
-#assigned,#completed{
+.assigned,.completed{
     width:50%;
 }
 
