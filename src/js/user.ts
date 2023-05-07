@@ -11,7 +11,7 @@ interface IProject{
 
 import {Project} from './project'
 
-interface IUser
+export interface IUser
     {
         id?: number
         name: string
@@ -42,24 +42,28 @@ interface IUser
     }
      static async userSignup(user:IUser){
         const user1 = await User.getUserByEmail(user.email)
-        if (user1.length){return false}
-       user.role="User"
-        const response = await fetch(User.userEndPoint,{
-            method:"POST",
-            body:JSON.stringify(user),
-            headers:{
-                "Content-Type": "application/json"
-            }
-        })
-        
-        return response
+        if (user1.length)
+        {
+            return false
+        }else{
+            user.role="User"
+            const response = await fetch(User.userEndPoint,{
+                method:"POST",
+                body:JSON.stringify(user),
+                headers:{
+                    "Content-Type": "application/json"
+                }
+            })
+
+            return response
+        }
 
     }
 
     static async userSignin(email:string, password:string){
         const response = await fetch(User.userEndPoint+'?email='+email+'&password='+password)
         const user = (await response.json())[0]
-        delete user.password
+        if(user){delete user.password}
         return user
 
     }
@@ -74,7 +78,7 @@ interface IUser
        
         const response = await fetch(User.userEndPoint+"/"+this.loggedUser)
         const loggedUser = await response.json()
-        delete loggedUser.password
+        if(loggedUser){delete loggedUser.password}
         return loggedUser
     }
     async renderUserData(){
