@@ -1,3 +1,4 @@
+import { Admin } from './admin'
 import {User, IUser} from './user'
 import { DateUtil } from './utils/date'
 import { generateUUID } from './utils/hash'
@@ -57,6 +58,9 @@ class App {
             switch (userData.role) {
                 case 'Admin':
                     this.dashboardpath('admin')
+                    if(userData && userData.id){                            
+                        new Admin(userData.id).init()
+                    }
                     this.dashboardEvents()
                     break;
                     case 'User':
