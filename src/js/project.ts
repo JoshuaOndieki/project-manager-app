@@ -1,11 +1,11 @@
 export interface IProject {
     id?: number
     title: string
-    assignedUser: number
+    assignedUser?: number
     status: ('Not Started' | 'In Progress' | 'Completed')
     assignedDate?:string
     completedDate?:string
-    dueDate: string
+    dueDate?: string
 }
 
 
