@@ -3,32 +3,17 @@ interface IProject {
     title: string
     assignedUser: number
     status: ('Not Started' | 'In Progress' | 'Completed')
-    assignedDate:string
-    completedDate:string
+    assignedDate?:string
+    completedDate?:string
     dueDate: string
 }
 
+
+
 // export default IProject
-
-
 export class Project {
     // url = http://localhost:3000/projects
     static async addProject(project:IProject) {
-        // let project1 = {
-        //     title: "myproject",
-        //     assignedUser: "Allan",
-        //     status: "Not Started",
-        //     dueDate: "2023-04-05"
-        // }
-
-        // let project2 = {
-        //     title: "another project",
-        //     assignedUser: "John",
-        //     status: "Started",
-        //     dueDate: "2023-06-05"
-        // }
-       
-        // receives a project object posts and returns true if successful otherwise false
         //fetch method POST
         // url
         await fetch("http://localhost:3000/projects", {
@@ -60,7 +45,6 @@ export class Project {
         }
         static async getUserProjects(userId:number){
             //fetch method GET 
-            //for a specific user 
             // url?userid=userid
             const response = await fetch(`http://localhost:3000/projects?assignedUser=${userId}`)
             const userprojects = await response.json()
