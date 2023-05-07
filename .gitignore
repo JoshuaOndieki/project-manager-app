@@ -4,3 +4,4 @@ dist/
 coverage/
 testdb.json
 .cache/
+.parcel-cache

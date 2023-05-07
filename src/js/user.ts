@@ -21,7 +21,7 @@ interface IUser
       }
 
 
- class User{
+ export class User{
     
 
     static userEndPoint = 'http://localhost:3000/users'
