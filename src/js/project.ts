@@ -3,6 +3,8 @@ interface IProject {
     title: string
     assignedUser: number
     status: ('Not Started' | 'In Progress' | 'Completed')
+    assignedDate:string
+    completedDate:string
     dueDate: string
 }
 
