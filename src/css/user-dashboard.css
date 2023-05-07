@@ -11,21 +11,10 @@ main>div:first-child {
     justify-content: center;
     margin-left: 0;
     padding: 1% 4%;
-    width: min(300px, 60svw);
 }
-/* .userpanel{
-    width:30%;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin: 1%;
-    width: 98%;
-    display: flex;
-    flex-direction: column;
-} */
 
 main>div:first-child>p{
-    font-size: medium;
+    font-size: large;
 }
 main{
     flex-wrap: wrap;
@@ -37,8 +26,6 @@ main{
     /* flex-direction: column; */
     
 }
-
-
 .assignedbtn{
     display: flex;
     justify-content: space-between;
@@ -61,20 +48,22 @@ main{
 }
 
 main>.projects-and-nav{
-    /* width:70%;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column; */
-    /* align-items: center; */
     border: 1px solid var(--gray-border-color);
     display: flex;
     flex: 1;
     flex-direction: column;
     min-height: 60svh;
-    min-width: min(90svw, 70%);
+    min-width: min(900px, 70%); 
     padding: 2% 0; 
 }
+.userpanel{
+    justify-content: flex-start;
+    background-color: #fff;
+}
+.userpanel>p{
+    margin:0;
 
+}
 #projects-container{
     display:flex;
     flex-wrap: wrap;
