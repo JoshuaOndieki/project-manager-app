@@ -95,11 +95,6 @@ export class Admin {
         return response
     }
 
-    async deleteProject(projectId:number) {
-        await Project.deleteProject(projectId)
-        location.reload()
-    }
-
     async getCategoryProjects(filter:TprojectCategory | false) {
         let projects =  await Project.getProjects()        
         if (filter) {
@@ -151,7 +146,7 @@ export class Admin {
                     <hr>
                     <div class="project-actions">
                         <button class="project-action project-update-btn">UPDATE</button>
-                        <button class="project-action project-delete-btn" onclick="this.deleteProject(${project.id})">DELETE</button>
+                        <button value=${project.id} class="project-action project-delete-btn">DELETE</button>
                     </div>
                 </div>
             </div>
@@ -161,6 +156,14 @@ export class Admin {
         
         if(html) { container.innerHTML = html }
         else { container.innerHTML = `No projects found under ${category}`}
+
+        let deleteBtns = document.getElementsByClassName('project-delete-btn')!
+        Array.prototype.forEach.call(deleteBtns, (element:HTMLButtonElement) => {
+            element.addEventListener('click', async ()=>{
+                await Project.deleteProject(+element.value)
+                location.reload()
+            })
+        })
 
         document.getElementById('current-section')!.innerHTML = category + ' Projects'
 
@@ -195,17 +198,28 @@ export class Admin {
                     <td>${user.id}</td>
                     <td>${user.name}</td>
                     <td>${user.email}</td>
-                    <td><button onclick="${new Admin(user.id)}.deleteUser(${user.id})">DELETE</button></td>
+                    <td><button value="${user.id}" class="delete-user-btn">DELETE</button></td>
                 </tr>
                 `          
             }
 
-        })        
+        }) 
+        
+        
         if (usershtml) {
             container.innerHTML = html + usershtml + `</table>`
         }else{
             container.innerHTML = 'No users available'
         }
+
+        let deleteBtns = document.getElementsByClassName('delete-user-btn')!
+        Array.prototype.forEach.call(deleteBtns, (element:HTMLButtonElement) => {
+            element.addEventListener('click', async (event)=>{
+                event.preventDefault()
+                await this.deleteUser(+element.value)
+                location.reload()
+            })
+        })
 
     }
 
