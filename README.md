@@ -7,7 +7,17 @@
 - `npm install` to install dependencies.
 
 - Use `npm run dev` to start up a development server ready with a devdb.json already started.
+**NOTE** These commands may not work on some terminals as it runs a bash sh script
+Use a bash e.g. **Git Bash**
 
 - Use `npm run build` to bundle the app one time.
 
 - Use `npm run tests` to run tests and see coverage.
+
+## DEFAULTS
+
+The default admin is
+
+Email: _admin@projectmanagerapp.com_ 
+
+Password: _pass_
