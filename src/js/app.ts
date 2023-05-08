@@ -1,6 +1,9 @@
+import { Admin } from './admin'
 import {User, IUser} from './user'
 import { DateUtil } from './utils/date'
 import { generateUUID } from './utils/hash'
+
+const Admin1 = Admin
 
 
 interface Isession{
@@ -57,6 +60,9 @@ class App {
             switch (userData.role) {
                 case 'Admin':
                     this.dashboardpath('admin')
+                    if(userData && userData.id){                            
+                        new Admin(userData.id).init()
+                    }
                     this.dashboardEvents()
                     break;
                     case 'User':
@@ -98,6 +104,7 @@ class App {
     }
 
     async signupAction(event:SubmitEvent, signupForm:HTMLFormElement) {
+        event.preventDefault()
         const formData = new FormData(signupForm);
         const data = Object.fromEntries(formData.entries())
         if (this.confirmPassword(event, data.password, data['confirm-password'])) {
@@ -108,10 +115,10 @@ class App {
                 password: data.password.toString()
             }
             
-            let response = await User.userSignup(userData)            
+            let response = await User.userSignup(userData)  
+            console.log('response', response);
             if (response && response.ok) {
-                alert('success signup')
-                return true
+                window.location.href = '/html/signin.html'
             }else{
                 alert('Error signing up')
             }
@@ -159,7 +166,8 @@ class App {
 
     async dashboardEvents() {
         let signOutElement = document.getElementById('sign-out') as HTMLButtonElement
-        signOutElement.addEventListener('click', async ()=>{
+        signOutElement.addEventListener('click', async (event)=>{
+            event.preventDefault()
             let storedSession = this.getStoredSession()
             if (storedSession) {
                 await this.revokeSession(storedSession)
@@ -232,7 +240,7 @@ class App {
     async revokeSession(storedSession:IStoredSession) {
         let session = await this.getSession(storedSession)
         if (session) {
-            let response = await fetch(this.sessionsUrl+'/'+storedSession.id,{
+            let response = await fetch(this.sessionsUrl+'/'+session.id,{
                 method:"PATCH",
                 body: JSON.stringify({revoked:true}),
                     headers: {
