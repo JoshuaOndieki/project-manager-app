@@ -126,11 +126,7 @@ export class Admin {
         let projects = await this.getCategoryProjects(category)        
         let container = document.getElementById('container') as HTMLDivElement
         let html = ``
-        container.innerHTML = ''
-        localStorage.setItem('project', JSON.stringify(Object.keys(projects)))
-        localStorage.setItem('cat', category)
-        console.log(projects);
-        
+        container.innerHTML = ''    
         
         projects.forEach((project:Required<IProject>) => {
             let assignedUser = project.assignedUser? project.assignedUser: 'None'
@@ -157,9 +153,7 @@ export class Admin {
                     </div>
                 </div>
             </div>
-        `
-        console.log(html);
-        
+        `        
         html += projectHTML
         })
         
@@ -212,7 +206,7 @@ export class Admin {
     }
 
     async renderProjectUpdateForm(projectId:number) {
-        let project = await Project.getProject(projectId)
+        let project:Required<IProject> = await Project.getProject(projectId)
         let updateFormHTML = `
         <form id="update-project-form" action="">
             <h1>UPDATE PROJECT <span>#${project.id}</span></h1>
@@ -235,24 +229,22 @@ export class Admin {
         </form>
         `
 
-        let container = document.getElementById('container')!.innerHTML =updateFormHTML
+        document.getElementById('container')!.innerHTML =updateFormHTML
         let updateForm = document.getElementById('update-project-form') as HTMLFormElement
         updateForm.addEventListener('submit', async (event)=>{
             event.preventDefault()
-            let updatedProject:Partial<IProject>;
             let title = (document.getElementById('updated-project-title') as HTMLInputElement).value
             let assignedUser = +((document.getElementById('updated-project-assigneduser') as HTMLSelectElement).value)
             let dueDate = (document.getElementById('updated-project-duedate') as HTMLInputElement).value
+
             let assignedDate = DateUtil.formatDate(new Date())
-            if(assignedUser){}
-            updatedProject = {
+
+            await Project.updateProject(project.id, {
                 title,
                 assignedUser,
                 dueDate,
                 assignedDate
-            }
-
-            await Project.updateProject(project.id, updatedProject)
+            })
             window.location.href = '/html/admin.html'
         })
 
