@@ -144,12 +144,30 @@ class App {
     }
 
     async resetPasswordAction(event:SubmitEvent, resetForm:HTMLFormElement) {
+        event.preventDefault()
         const formData = new FormData(resetForm)
         const data = Object.fromEntries(formData.entries())
         if (this.confirmPassword(event, data.password, data['confirm-password'])) {
-            delete data['confirm-password']
-            localStorage.setItem('testreset', 'testing reset')
-            localStorage.setItem('reset', JSON.stringify(data))  
+            let email = document.getElementById('email') as HTMLInputElement
+            let newPassword = document.getElementById('password') as HTMLInputElement
+            let user = (await User.getUserByEmail(email.value))[0]
+            
+            if (Object.keys(user).length) {
+                let response = await fetch(Admin.userEndPoint+'/'+user.id,{
+                    method: "PATCH",
+                    headers: {
+                        'Content-Type': "application/json"
+                    },
+                    body: JSON.stringify({"password":newPassword.value})
+                })
+                if(response.ok){
+                    alert('Successfully update password')
+                }
+            }else{
+                alert('user does not exist')
+            }
+        }else{
+            alert('Confirm Password does not match')
         }
 
     }
