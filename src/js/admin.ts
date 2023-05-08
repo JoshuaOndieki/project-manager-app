@@ -35,6 +35,15 @@ export class Admin {
             Project.addProject(project)
         })
 
+        let viewusersBtn = document.getElementById('viewusers-section-btn')!
+        viewusersBtn.addEventListener('click', ()=>{
+            document.querySelectorAll('.selected-section')!.forEach((element:Element) => {
+                element.classList.remove('selected-section')            
+            })
+            viewusersBtn.classList.add('selected-section')
+            this.renderUsers()
+        })
+
         document.getElementById('unassigned-section-btn')!.addEventListener('click', ()=>{
             this.renderProjects('Unassigned')
         })
@@ -75,7 +84,20 @@ export class Admin {
             delete user.password
             return user
         })
-        return users
+        return users.filter((user:IUser)=>{return user.role != 'Admin'})
+    }
+
+    async deleteUser(userId:number) {
+        let response = await fetch(Admin.userEndPoint + '/'+ userId, {
+            "method": "DELETE"
+        })
+        document.getElementById('viewusers-section-btn')!.click()
+        return response
+    }
+
+    async deleteProject(projectId:number) {
+        await Project.deleteProject(projectId)
+        location.reload()
     }
 
     async getCategoryProjects(filter:TprojectCategory | false) {
@@ -129,7 +151,7 @@ export class Admin {
                     <hr>
                     <div class="project-actions">
                         <button class="project-action project-update-btn">UPDATE</button>
-                        <button class="project-action project-delete-btn">DELETE</button>
+                        <button class="project-action project-delete-btn" onclick="this.deleteProject(${project.id})">DELETE</button>
                     </div>
                 </div>
             </div>
@@ -146,6 +168,45 @@ export class Admin {
             element.classList.remove('selected-section')            
         })
         document.getElementById(category.toLowerCase()+'-section-btn')!.classList.add('selected-section')
-    }
-}
 
+        document.getElementById('assigned-section-btn')!.getElementsByTagName('span')[0].innerHTML =(await this.getCategoryProjects('Assigned')).length
+        document.getElementById('unassigned-section-btn')!.getElementsByTagName('span')[0].innerHTML =(await this.getCategoryProjects('Unassigned')).length
+        document.getElementById('completed-section-btn')!.getElementsByTagName('span')[0].innerHTML =(await this.getCategoryProjects('Completed')).length
+    }
+
+    async renderUsers(){
+        let users = await this.getAllUsers()        
+        let container = document.getElementById('container')!
+        container.innerHTML = ''
+        let html = `
+        <table id="users-table">
+            <tr>
+                <th>USER #</th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>DELETE</th>
+            </tr>
+        `
+        let usershtml = ``
+        users.forEach((user:IUser) => {
+            if (user.id) {
+                usershtml += `
+                <tr class="user-table-row">
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td><button onclick="${new Admin(user.id)}.deleteUser(${user.id})">DELETE</button></td>
+                </tr>
+                `          
+            }
+
+        })        
+        if (usershtml) {
+            container.innerHTML = html + usershtml + `</table>`
+        }else{
+            container.innerHTML = 'No users available'
+        }
+
+    }
+
+}
