@@ -1,5 +1,6 @@
 import { Project, IProject} from "./project";
 import { IUser, User } from "./user";
+import {DateUtil} from './utils/date'
 
 type TprojectCategory = 'Unassigned' | 'Assigned' | 'Completed'
 
@@ -242,10 +243,13 @@ export class Admin {
             let title = (document.getElementById('updated-project-title') as HTMLInputElement).value
             let assignedUser = +((document.getElementById('updated-project-assigneduser') as HTMLSelectElement).value)
             let dueDate = (document.getElementById('updated-project-duedate') as HTMLInputElement).value
+            let assignedDate = DateUtil.formatDate(new Date())
+            if(assignedUser){}
             updatedProject = {
                 title,
                 assignedUser,
-                dueDate
+                dueDate,
+                assignedDate
             }
 
             await Project.updateProject(project.id, updatedProject)
