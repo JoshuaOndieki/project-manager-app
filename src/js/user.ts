@@ -1,15 +1,8 @@
 type TStatus = 'Not Started' | 'In Progress' | 'Completed'
 
-interface IProject{
-    id?:number
-    title:string 
-    dueDate:string
-    status:TStatus
-}
 
-
-
-import {Project} from './project'
+import {DateUtil} from './utils/date'
+import {Project, IProject} from './project'
 
 export interface IUser
     {
@@ -134,7 +127,8 @@ export interface IUser
 
             })
             completeButton?.addEventListener('click',async()=>{
-                await Project.updateProject(assignedProject.id,{status:'Completed'})
+                let completedDate = DateUtil.formatDate(new Date())
+                await Project.updateProject(assignedProject.id,{status:'Completed',completedDate})
                 location.reload()
             })
             
@@ -154,7 +148,10 @@ export interface IUser
                     let projectHTML = 
                     ` <div class="card">
                      <h3> Title: ${cProject.title}</h3>
+                     <p>Assigned Date: ${cProject.assignedDate}</p>
                      <p>Due Date: ${cProject.dueDate}</p>
+                     <p>Completed Date: ${cProject.completedDate}</p>
+                     
                      
                  </div>`
                      projectsContainer.innerHTML+= projectHTML          
