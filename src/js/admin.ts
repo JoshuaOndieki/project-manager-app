@@ -1,5 +1,5 @@
 import { Project, IProject} from "./project";
-import { IUser } from "./user";
+import { IUser, User } from "./user";
 
 type TprojectCategory = 'Unassigned' | 'Assigned' | 'Completed'
 
@@ -126,8 +126,14 @@ export class Admin {
         let container = document.getElementById('container') as HTMLDivElement
         let html = ``
         container.innerHTML = ''
-        projects.forEach((project:IProject) => {            
-            let assignedUser = project.assignedUser? project.assignedUser: ''
+        localStorage.setItem('project', JSON.stringify(Object.keys(projects)))
+        localStorage.setItem('cat', category)
+        console.log(projects);
+        
+        
+        projects.forEach((project:Required<IProject>) => {
+            let assignedUser = project.assignedUser? project.assignedUser: 'None'
+            
             let projectHTML = `
             <div class="project-card">
                 <div class="project-main-details">
@@ -145,12 +151,14 @@ export class Admin {
                     </div>
                     <hr>
                     <div class="project-actions">
-                        <button class="project-action project-update-btn">UPDATE</button>
+                        <button value=${project.id} class="project-action project-update-btn">UPDATE</button>
                         <button value=${project.id} class="project-action project-delete-btn">DELETE</button>
                     </div>
                 </div>
             </div>
         `
+        console.log(html);
+        
         html += projectHTML
         })
         
@@ -165,6 +173,20 @@ export class Admin {
             })
         })
 
+        let updateBtns = document.getElementsByClassName('project-update-btn')!
+        if (category == 'Completed') {
+            Array.prototype.forEach.call(updateBtns, (element:HTMLButtonElement) => {
+                element.remove()
+            })
+        } else {
+            
+        }
+        Array.prototype.forEach.call(updateBtns, (element:HTMLButtonElement) => {
+            element.addEventListener('click', async ()=>{
+                this.renderProjectUpdateForm(+element.value)
+            })
+        })
+
         document.getElementById('current-section')!.innerHTML = category + ' Projects'
 
         document.querySelectorAll('.selected-section')!.forEach((element:Element) => {
@@ -175,6 +197,61 @@ export class Admin {
         document.getElementById('assigned-section-btn')!.getElementsByTagName('span')[0].innerHTML =(await this.getCategoryProjects('Assigned')).length
         document.getElementById('unassigned-section-btn')!.getElementsByTagName('span')[0].innerHTML =(await this.getCategoryProjects('Unassigned')).length
         document.getElementById('completed-section-btn')!.getElementsByTagName('span')[0].innerHTML =(await this.getCategoryProjects('Completed')).length
+    }
+
+    async selectUsersOptions(assignedUserId:number) {
+        let selected = assignedUserId? '': 'selected'
+        let options =`<option ${selected} value="">Assign a user</option>`
+        let users = await this.getAllUsers()
+        users.forEach((user:IUser) => {
+            let selected = assignedUserId==user.id? 'selected':''
+            options += `<option ${selected} value="${user.id}">${user.name}   <${user.email}></option>`
+        });
+        return options
+    }
+
+    async renderProjectUpdateForm(projectId:number) {
+        let project = await Project.getProject(projectId)
+        let updateFormHTML = `
+        <form id="update-project-form" action="">
+            <h1>UPDATE PROJECT <span>#${project.id}</span></h1>
+            <input type="text" name="updated-project-id" id="updated-project-id" hidden value="${project.id}">
+            <div>
+                <label for="updated-project-title">Title:</label>
+                <input placeholder="Add Project Title" type="text" name="updated-project-title" id="updated-project-title" value="${project.title}">
+            </div>
+            <div>
+                <label for="updated-project-assigneduser">Assigned To:</label>
+                <select name="updated-project-assigneduser" id="updated-project-assigneduser">
+                    ${await this.selectUsersOptions(project.assignedUser)}
+                </select>
+            </div>
+            <div>
+                <label for="updated-project-duedate">Due:</label>
+                <input type="date" name="updated-project-duedate" id="updated-project-duedate" value="${project.dueDate}">
+            </div>
+            <input type="submit" value="UPDATE PROJECT" id="update-project-submit-btn">
+        </form>
+        `
+
+        let container = document.getElementById('container')!.innerHTML =updateFormHTML
+        let updateForm = document.getElementById('update-project-form') as HTMLFormElement
+        updateForm.addEventListener('submit', async (event)=>{
+            event.preventDefault()
+            let updatedProject:Partial<IProject>;
+            let title = (document.getElementById('updated-project-title') as HTMLInputElement).value
+            let assignedUser = +((document.getElementById('updated-project-assigneduser') as HTMLSelectElement).value)
+            let dueDate = (document.getElementById('updated-project-duedate') as HTMLInputElement).value
+            updatedProject = {
+                title,
+                assignedUser,
+                dueDate
+            }
+
+            await Project.updateProject(project.id, updatedProject)
+            window.location.href = '/html/admin.html'
+        })
+
     }
 
     async renderUsers(){
